@@ -1,0 +1,14 @@
+%h1 Tablero de tareas
+= link_to "Crear tarea", new_task_path, class: "btn btn-warning btn-lg"
+%table
+  %tr
+    %th Tarea
+    %th Estado
+    %th Tiempo restante
+    %th Asiganda a
+  - @tasks.each do |task|
+    %tr
+      %td= task.name
+      %td= task.status
+      %td= task.start_task
+      %td= task.employee.name

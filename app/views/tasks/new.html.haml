@@ -1,0 +1,11 @@
+= form_for @task do |f|
+  - if @errors
+    .error_messages
+      %ul
+        - @errors.each do |error|
+          %li{style: "color:red; font-size:25px;"}= error
+          - error
+  .form-group
+    = f.text_field :name, class: "form-control input-lg", placeholder: "Tarea"
+    = f.submit "Crear Tarea", class: "btn btn-warning btn-lg btn-block"
+    = link_to "Cancelar", tasks_path, class: "btn btn-warning btn-lg"
