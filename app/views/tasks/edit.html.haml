@@ -1,0 +1,21 @@
+= form_for @task do |f|
+  - if @errors
+    .error_messages
+      %ul
+        - @errors.each do |error|
+          %li{style: "color:red; font-size:25px;"}= error
+          - error
+  .form-group.form-group-sm.col-6
+    %h1 Asigna un empleado
+    %br
+    = f.label :assign, 'Asignar a: ', class: "control-label clearfix"
+    - names = []
+    - Employee.all . each do |emplo|
+      - names << emplo.name
+    = f.select :employee_id, (names)
+    %br
+    = f.label :stimate_days, 'Duracion de la tarea', class: "control-label clearfix"
+    = f.select :stimate_days, (0..30).to_a
+    %br
+    = f.submit "Asignar", class: "btn btn-success btn-sm"
+    = link_to "Cancelar", tasks_path, class: "btn btn-danger btn-sm"

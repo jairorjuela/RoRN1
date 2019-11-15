@@ -1,14 +1,30 @@
 %h1 Tablero de tareas
 = link_to "Crear tarea", new_task_path, class: "btn btn-warning btn-lg"
-%table
-  %tr
-    %th Tarea
-    %th Estado
-    %th Tiempo restante
-    %th Asiganda a
-  - @tasks.each do |task|
+%table.table.table-bordered
+  %thead.thead-dark.text-center
     %tr
-      %td= task.name
-      %td= task.status
-      %td= task.start_task
-      %td= task.employee.name
+      %th Tarea
+      %th Estado
+      %th Tiempo restante
+      %th Asiganda
+      %th Asignar
+      %th Cambiar estado
+  - @tasks.each do |task|
+    %tbody
+      %tr
+        %td= task.name
+        %td= task.status
+        %td
+          - if task.start_task
+            - start = task.created_at
+            - end_task = task.start_task
+            - time = end_task - start
+            = Time.at(time).utc.strftime("faltan %e dias")
+          - else
+            Sin asignar
+        %td= task.employee.name
+        %td
+          = link_to "Asignar", edit_task_path(task), class: "btn btn-info btn-sm"
+        %td
+          = link_to '<i class="material-icons">restore</i> En progreso'.html_safe, progress_tasks_path(task)
+          = link_to '<i class="material-icons">done_all</i> Hecha'.html_safe, done_tasks_path(task)

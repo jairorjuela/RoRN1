@@ -5,7 +5,10 @@
         - @errors.each do |error|
           %li{style: "color:red; font-size:25px;"}= error
           - error
-  .form-group
-    = f.text_field :name, class: "form-control input-lg", placeholder: "Tarea"
-    = f.submit "Crear Tarea", class: "btn btn-warning btn-lg btn-block"
-    = link_to "Cancelar", tasks_path, class: "btn btn-warning btn-lg"
+  .form-group.form-group-sm.col-6
+    %h1 Crea una tarea
+    %br
+    = f.text_field :name, class: "form-control input-lg", placeholder: "Tarea", autocomplete: 'off'
+    %br
+    = f.submit "Crear Tarea", class: "btn btn-success btn-sm"
+    = link_to "Cancelar", tasks_path, class: "btn btn-danger btn-sm"
